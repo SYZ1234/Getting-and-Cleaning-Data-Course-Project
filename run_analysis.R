@@ -4,7 +4,7 @@ library(data.table)
 library(reshape2)
 #Load data
 path <- getwd()
-url <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
+#url <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
 download.file(url, file.path(path, "dataFiles.zip"))
 unzip(zipfile = "dataFiles.zip")
 path<-file.path(path , "UCI HAR Dataset")
@@ -50,30 +50,30 @@ data_new <- subset(data_full,select=c('activity_labels','subject',as.character(f
 #Question 3: Uses descriptive activity names to name the activities in the data set
 
 activity_name <- read.table(file.path(path, "activity_labels.txt"),head=FALSE)
-data_full$activity_labels <- as.character(data_full$activity_labels)
+data_new$activity_labels <- as.character(data_new$activity_labels)
 for (i in 1:6){
-	data_full$activity_labels[data_full$activity_labels==i]<-as.character(activity_name$V2[i])
+	data_new$activity_labels[data_new$activity_labels==i]<-as.character(activity_name$V2[i])
 }
-data_full$activity_labels <- as.factor(data_full$activity_labels)
+data_new$activity_labels <- as.factor(data_new$activity_labels)
 
 
 
 #Question 4: Appropriately labels the data set with descriptive variable names.
 
-names(data_full)<-gsub('Acc', 'accelerometer', names(data_full))
-names(data_full)<-gsub('Gyro', 'gyroscope', names(data_full))
-names(data_full)<-gsub('Mag', 'M]magnitude', names(data_full))
-names(data_full)<-gsub('^t', 'time', names(data_full))
-names(data_full)<-gsub('^f', 'frequency', names(data_full))
-names(data_full)<-gsub('-mean()', 'mean', names(data_full))
-names(data_full)<-gsub('-std()', 'standard deviation', names(data_full))
-names(data_full)<-gsub('-freq()', 'frequency', names(data_full))
-names(data_full)<-gsub('BodyBody', 'body', names(data_full))
+names(data_new)<-gsub('Acc', 'accelerometer', names(data_new))
+names(data_new)<-gsub('Gyro', 'gyroscope', names(data_new))
+names(data_new)<-gsub('Mag', 'M]magnitude', names(data_new))
+names(data_new)<-gsub('^t', 'time', names(data_new))
+names(data_new)<-gsub('^f', 'frequency', names(data_new))
+names(data_new)<-gsub('-mean()', 'mean', names(data_new))
+names(data_new)<-gsub('-std()', 'standard deviation', names(data_new))
+names(data_new)<-gsub('-freq()', 'frequency', names(data_new))
+names(data_new)<-gsub('BodyBody', 'body', names(data_new))
 
 #Question 5: From the data set in step 4, creates a second, independent tidy data set with the average of 
 #each variable for each activity and each subject.
 
-write.table(data_full, "tidy_data.txt", row.name=FALSE)
+write.table(data_new, "tidy_data.txt", row.name=FALSE)
 
 
 
