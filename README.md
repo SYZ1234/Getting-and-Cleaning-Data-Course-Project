@@ -1,6 +1,8 @@
 # Getting-and-Cleaning-Data-Course-Project
 Getting and Cleaning Data Course Project: by SYZ
 
+This is a Coursera assignment.
+
 The analysis code mainly do the following five things:
 
 1. Merges the training and the test sets to create one data set.
